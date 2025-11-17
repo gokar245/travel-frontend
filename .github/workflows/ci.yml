@@ -12,24 +12,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: use node
+      - name: Use Node.js 18
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: install dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: build
+      - name: Build (Vite)
         run: npm run build
 
       - name: Upload artifact (pages)
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./build
+          path: ./dist
 
   deploy:
     needs: build
